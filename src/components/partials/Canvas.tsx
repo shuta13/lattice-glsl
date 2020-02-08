@@ -43,7 +43,7 @@ const Canvas: React.FC = () => {
   }, [animate]);
 
   const uniformsParams01 = {
-    // m: [x, y],
+    m: [x, y],
     t: timer,
     r: [width, height]
   }

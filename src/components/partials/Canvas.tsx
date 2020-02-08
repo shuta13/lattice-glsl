@@ -3,7 +3,7 @@ import { Shaders, Node, GLSL } from "gl-react";
 import { Surface } from 'gl-react-dom';
 
 import useGetWindowSize from '../hooks/useGetWindowSize';
-// import useTrackMousePosition from '../hooks/useTrackMousePosition';
+import useTrackMousePosition from '../hooks/useTrackMousePosition';
 
 const fragment01 = require('../shaders/Canvas/frag01.glsl');
 
@@ -17,7 +17,7 @@ let payload = 0;
 
 const Canvas: React.FC = () => {
   const { width, height } = useGetWindowSize();
-  // const { x, y } = useTrackMousePosition();
+  const { x, y } = useTrackMousePosition();
 
   // timer for animate
   const requestRef = useRef(0);
@@ -33,7 +33,7 @@ const Canvas: React.FC = () => {
   }, [animate]);
 
   const uniformsParams01 = {
-    // m: [x, y],
+    m: [x, y],
     t: timer,
     r: [width, height]
   }

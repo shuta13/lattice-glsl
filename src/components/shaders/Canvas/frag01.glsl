@@ -1,13 +1,10 @@
 precision mediump float;
-// uniform vec2  m;       // mouse
+uniform vec2  m;       // mouse
 uniform float t;       // time
 uniform vec2  r;       // resolution
 
-const float PI  = 3.14;
-const float PI2 = PI* 2.;
-
 void main(void){
     vec2 p = (gl_FragCoord.xy * 2.0 - r) / min(r.x, r.y);
-    float l = length(vec2( 0, sin(p.y + t) + sin(p.x + t)));
+    float l = length(vec2(0, sin(p.y + m.x * 0.01) + sin(p.x + m.y * 0.01)));
     gl_FragColor = vec4(vec3(l), 1.0);
 }

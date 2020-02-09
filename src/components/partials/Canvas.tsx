@@ -2,15 +2,26 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Shaders, Node, GLSL } from "gl-react";
 import { Surface } from 'gl-react-dom';
 import Stats from 'stats.js';
+import {
+  TextureLoader
+} from 'three';
 
 import useGetWindowSize from '../hooks/useGetWindowSize';
 import useTrackMousePosition from '../hooks/useTrackMousePosition';
 
-const fragment01 = require('../shaders/Canvas/frag01.glsl');
+const frag01 = require('../shaders/Canvas/frag01.glsl');
+const frag02 = require('../shaders/Canvas/frag02.glsl');
+const vert02 = require('../shaders/Canvas/vert02.glsl');
+
+const texture02 = require('../../static/Addict.png');
 
 const shaders = Shaders.create({
   fluid01: {
-    frag: GLSL`${fragment01.default}`
+    frag: GLSL`${frag01.default}`
+  },
+  fluid02: {
+    frag: GLSL`${frag02.default}`,
+    vert: GLSL`${vert02.default}`
   }
 });
 
@@ -46,14 +57,26 @@ const Canvas: React.FC = () => {
     m: [x, y],
     t: timer,
     r: [width, height]
+  };
+  const uniformsParams02 = {
+    u_texture: {
+      type: 't',
+      value: new TextureLoader().load(`${ texture02 }`)
+    }
   }
 
   return (
     <div className="CanvasWrap" ref={mount}>
-      <Surface width={width} height={height}>
+      {/* <Surface width={width} height={height}>
         <Node
           shader={shaders.fluid01}
           uniforms={{ ...uniformsParams01 }}
+        />
+      </Surface> */}
+      <Surface width={width} height={height}>
+        <Node
+          shader={shaders.fluid02}
+          uniforms={{ ...uniformsParams02 }}
         />
       </Surface>
     </div>

@@ -43,9 +43,9 @@ const Canvas: React.FC = () => {
   }, [animate]);
 
   const uniformsParams01 = {
-    m: [x, y],
-    t: timer,
-    r: [width, height]
+    mouse: [x, y],
+    time: timer,
+    resolution: [width, height]
   }
 
   return (

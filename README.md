@@ -1,1 +1,1 @@
-# fluid-simulation
+# lattice-glsl
